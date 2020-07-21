@@ -45,7 +45,6 @@ You can also use Kusto explorer which is a desktop edition similar to the Web UI
       let dt = 1d;
       let horizon=7d;
       NrtaLabTable
-      | project Timestamp, Action 
       | where Action == "Purchased"
       | make-series Purchases=count() on Timestamp from min_t to max_t+horizon step dt  
       | extend forecast = series_decompose_forecast(Purchases, toint(horizon/dt))
